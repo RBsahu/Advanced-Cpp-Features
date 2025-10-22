@@ -67,16 +67,16 @@ public:
 };
 
 //C++11 Smart Pointers (unique_ptr, shared_ptr, weak_ptr)
-class Test 
+class Test
 {
 private:
     int value;
 public:
-    Test(int v) : value(v) 
+    Test(int v) : value(v)
     {
         cout << "Test" << value << "constructed" << endl;
     }
-    ~Test() 
+    ~Test()
     {
         cout << value << " destroyed" << endl;
     }
@@ -91,7 +91,7 @@ public:
 constexpr int ARRAY_SIZE = 5;
 
 // Function demonstrating runtime assert
-void checkPositive(int value) 
+void checkPositive(int value)
 {
     assert(value > 0 && "Value must be positive!"); // Runtime check
     cout << "Value is positive: " << value << endl;
@@ -102,7 +102,7 @@ int main()
 
     cout << "C++11 features demonstration\n\n";
     cout << "\n=== Auto Type Deduction ===" << endl;
-   
+
     /*
     Rules for 'auto' in C++11:
     1. Must have an initializer
@@ -134,7 +134,7 @@ int main()
 
     //cout << "2. Range-Based for Loop: ";
     cout << "\n=== Range-Based for Loop ===" << endl;
-    
+
     // Using auto in range-based for loop
     vector<int> v = { 1, 2, 3, 4, 5 };
     cout << "Display Vector Elements: ";
@@ -151,15 +151,15 @@ int main()
     m.insert({ 2, "Balak" });
     m.insert({ 3, "Sahu" });
     m.insert({ 4, "Test" });
-        
+
     cout << "\n=== Display Map Elements  ===" << endl;
     for (const auto& x : m)
         cout << x.first << " --> " << x.second << endl;
 
     // Invalid example: 'auto' cannot be used as a function parameter type in C++11
     // void test(auto x); //  Error
-      
-    cout << "\n=== Lambda Function  ===" << endl;    
+
+    cout << "\n=== Lambda Function  ===" << endl;
     cout << "\n Example 1: Basic Lambda :";
     auto test = []()
         {
@@ -167,7 +167,7 @@ int main()
         };
 
     // call lamda function
-	test();
+    test();
 
     cout << "\n Example 2: Lambda with Parameters and Return :";
     auto add = [](int a, int b)
@@ -175,54 +175,54 @@ int main()
             return a + b;
         };
     cout << "\nSum = " << add(5, 3) << endl;
-	cout << "\n Example 3: Lambda Capturing Variables :";
+    cout << "\n Example 3: Lambda Capturing Variables :";
     int x1 = 10;
-	int y1 = 20;
+    int y1 = 20;
     auto sum = [x1, y1]() // capture by value
         {
             return x1 + y1;
-		};
+        };
     auto modify = [&x1, &y1]() // capture by reference
         {
             x1 += 10;
             y1 += 20;
             return x1 + y1;
-		};
+        };
 
-	/// Uses original values of x1 and y1
-	cout<<"\n capture by value :"<<sum();
-	cout<<"\n capture by reference :" << modify();
-    cout<<"\nAfter modify: x1 = " << x1 << ", y1 = " << y1 << "\n";
+    /// Uses original values of x1 and y1
+    cout << "\n capture by value :" << sum();
+    cout << "\n capture by reference :" << modify();
+    cout << "\nAfter modify: x1 = " << x1 << ", y1 = " << y1 << "\n";
 
-	cout << "\n Example: Capture by this pointer :";
+    cout << "\n Example: Capture by this pointer :";
     class capture_this
     {
-		int value;   
+        int value;
     public:
         capture_this() = default;
         capture_this(int v) :value(v) {}
         void print()
         {
-            // [this] lambda access object’s member  value.
+            // [this] lambda access objectâ€™s member  value.
             auto show = [this]()
                 {
                     cout << "\n Value = " << value << endl;
                 };
-			show(); // call lambda function show
+            show(); // call lambda function show
         }
     };
-        
+
     capture_this tt(100);
     tt.print();
 
 
-	cout << "\n Example 4: Lambda in STL Algorithms :";
+    cout << "\n Example 4: Lambda in STL Algorithms :";
 
-	vector<int> vec = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    vector<int> vec = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     for_each(vec.begin(), vec.end(), [](int n)
         {
             cout << n * n << " "; // print square of each element
-		});
+        });
 
     cout << endl;
     class Base1
@@ -233,12 +233,12 @@ int main()
         Base1(const char* s)
         {
             str = new char(sizeof(s));
-            strcpy_s(str,sizeof(str), s);
+            strcpy_s(str, sizeof(str), s);
         }
         Base1(const Base1& b)
         {
             str = new char(sizeof(b.str));
-            strcpy_s(str, sizeof(str), b.str);            
+            strcpy_s(str, sizeof(str), b.str);
         }
         void printString()
         {
@@ -255,14 +255,14 @@ int main()
         };
 
     Base1 b4 = b2;
-    object(b4);    
+    object(b4);
     cout << "\n=== Override and Final Specifiers  ===" << endl;
-      
+
     Base* basePtr = new Derived();
     basePtr->showMessage(); // Calls Derived::showMessage()
     basePtr->display();     // Calls Derived::display()
     basePtr->greet();       // Calls Base::greet() (final)
-    delete basePtr;        
+    delete basePtr;
 
     cout << "\n Smart Pointers (unique_ptr, shared_ptr, weak_ptr):" << endl;
     cout << "\n=== unique_ptr Example ===" << endl;
@@ -295,7 +295,7 @@ int main()
     cout << "\n=== weak_ptr Example ===" << endl;
     {
         shared_ptr<Test> sp3 = make_shared<Test>(30);
-        weak_ptr<Test> wp = sp3; // Weak reference, doesn’t increase count
+        weak_ptr<Test> wp = sp3; // Weak reference, doesnâ€™t increase count
 
         cout << "sp3 use_count = " << sp3.use_count() << endl;
 
@@ -311,7 +311,7 @@ int main()
             cout << "weak_ptr expired. Object no longer exists." << endl;
     }
 
-    
+
 
     cout << "\nUniform Initialization (Brace Initialization) :" << endl;
     cout << "=== Uniform Initialization Examples ===" << endl;
@@ -334,7 +334,7 @@ int main()
         cout << vv << " ";
     cout << endl;
 
-    
+
     cout << "\nassert and static_assert :" << endl;
     cout << "=== static_assert Example ===" << endl;
 
@@ -347,7 +347,7 @@ int main()
     cout << "\n=== assert Example ===" << endl;
     checkPositive(10);   //  Passes
     //  Uncommenting causes runtime assertion failure  
-	// We will get run time error if the value is negative
+    // We will get run time error if the value is negative
     //checkPositive(-5); 
 
     cout << "\n=== End of Program ===" << endl;

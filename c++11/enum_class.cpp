@@ -1,33 +1,32 @@
 //code example for enum class in C++11
 /*
 Definition:
-enum class (also called scoped enumeration) is provides strongly-typed and scope-safe enumerations.
+enum class provide:
+Strong type safety
+Scoped names
+No implicit conversion to int
 
-Unlike traditional enum, an enum class:
-Does not implicitly convert to integers
-Keeps enumerator names inside the enum scope
+Basic Syntax:
+enum class EnumName : underlying_type
+{
+    VALUE1,
+    VALUE2,
+    VALUE3
+};
+underlying_type is optional (default is int)
+Values are accessed using scope resolution EnumName::VALUE
+
+Use Cases of enum class
+No name collision
+No implicit conversion to int
 Avoids name collisions
 Improves type safety
-
-Syntax:
-Use Cases of enum class
-Avoid name conflicts - When multiple enums have same enumerator names
-Improve type safety - Prevents accidental comparison with integers or other enums
-Large codebases & APIs - Used in modern C++ libraries, embedded systems, and framework APIs
-Switch-case clarity - Makes code more readable and maintainable
-
 
 */
 
 #include <iostream>
 using namespace std;
 
-enum class EnumName 
-{
-    Enumerator1,
-    Enumerator2,
-    Enumerator3
-};
 
 enum class Color 
 {
@@ -59,18 +58,18 @@ int main()
 {
     cout << " C++11 features enum class\n";
 
-	cout << "\nBasic Code Example :\n";
+	cout << "\n Simple Code Example :\n";
     Color c = Color::Red;
 
     if (c == Color::Red) 
     {
-        cout << "Color is Red" << endl;
+        cout << " Color is Red" << endl;
     }
 
-    cout << "\nenum class with Explicit Underlying Type :\n";
+    cout << "\n enum class with Explicit Underlying Type :\n";
     ErrorCode err = ErrorCode::NOT_FOUND;
 
-    cout << "Error code value: " << static_cast<int>(err) << endl;
+    cout << " Error code value: " << static_cast<int>(err) << endl;
 
 	cout << "\n Comparison Between Two enum class Types (Not Allowed) :\n";
     enum class A { X };
@@ -78,10 +77,22 @@ int main()
 
     // if (A::X == B::X)  Compilation error
 
-    cout << "\n Real-Time Use Case Example Device State Management(Embedded / System Software)";
+    cout << "\n Device State :";
     DeviceState current = DeviceState::ON;
     printState(current);
 
+
+    // Problem with Traditional enum
+    //enum Color { Red, Green };
+    //enum Traffic { Red, Yellow };    
+    
+    //Color c = Red;      // Ambiguous
+
+    //Solution using enum class
+    enum class Color { Red, Green };
+    enum class Traffic { Red, Yellow };
+    Color cc = Color::Red;
+    Traffic t = Traffic::Red;   
 
 	cout << "\n\n End of Program \n";
     return 0;       
